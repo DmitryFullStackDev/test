@@ -8,12 +8,10 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^8.0.4",
-    "react-transition-group": "^4.4.5",
-    "redux-dynamic-modules": "^5.2.3",
-    "redux-dynamic-modules-saga": "^5.2.3",
+    "react-router-dom": "^6.8.1",
+    "react-toastify": "^8.0.0",
     "redux-saga": "^1.2.1",
-    "styled-components": "^5.3.6",
-    "web-vitals": "^2.1.4"
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "@types/node": "^18.8.4",
@@ -33,7 +31,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build"
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
