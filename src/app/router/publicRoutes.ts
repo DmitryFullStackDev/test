@@ -1,6 +1,6 @@
 import React from 'react'
 import { routes } from '../../shared'
-import { Home, SpecificUser } from '../../pages'
+import { AddUser, Home, SpecificUser } from '../../pages'
 
 interface IRoutes {
   Component: React.FC<any>
@@ -17,7 +17,7 @@ export const publicRoutes = [
     path: routes.specificUser,
   },
   {
-    Component: Home,
+    Component: AddUser,
     path: routes.addUser,
   },
 ] as IRoutes[]

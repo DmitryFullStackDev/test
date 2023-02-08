@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useActions } from '../../shared'
+import { getUsersArray, setUsersArray } from '../../entries'
 
 const Theme = ({ children }) => {
+  const a = useActions({ getUsersArray, setUsersArray })
+
+  useEffect(() => {
+    a.getUsersArray()
+  }, [])
+
   const theme = {
     color: {
       ui100: '#EFF1F3',

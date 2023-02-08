@@ -66,6 +66,8 @@ type Props = {
   width?: string
   margin?: string
   value: string
+  error?: any
+  touched?: any
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   onClick?: (e: ChangeEvent<HTMLInputElement>) => void
 }
@@ -79,6 +81,8 @@ export const SimpleInput: FC<Props> = ({
   value,
   onChange,
   onClick,
+  error,
+  touched,
 }) => {
   const inputRef = useRef(null)
 
@@ -93,6 +97,7 @@ export const SimpleInput: FC<Props> = ({
       margin={margin}
       width={width}
       onClick={() => inputRef.current.focus()}
+      isError={touched && Boolean(error)}
     >
       <Label htmlFor={inputName}>
         <Text color="disabled" margin="0 0 2px 0" type="caption">

@@ -1,23 +1,39 @@
-import React, { useEffect } from 'react'
-import { Box, Button, Text, useActions, useTypedSelector } from '../../shared'
+import React from 'react'
+import {
+  Box,
+  Button,
+  SimpleInput,
+  Text,
+  useActions,
+  useTypedSelector,
+} from '../../shared'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getUsersArray, setUsersArray } from '../../entries'
+import { deleteUser, updateUser } from '../../entries'
 
 export const SpecificUser = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const usersArrayData = useTypedSelector(state => state.usersArray.data)
   const isLoading = useTypedSelector(state => state.usersArray.isLoading)
-
-  const a = useActions({ getUsersArray, setUsersArray })
+  const a = useActions({ deleteUser, updateUser })
 
   const specificUser = usersArrayData.find(item => item.id === Number(id))
 
-  useEffect(() => {
-    if (usersArrayData.length === 0) {
-      a.getUsersArray()
-    }
-  }, [])
+  const handleDeleteClick = () => {
+    a.deleteUser(Number(id))
+    navigate('/')
+  }
+
+  const handleUpdateField = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: string,
+  ) => {
+    a.updateUser({
+      id: Number(id),
+      field,
+      value: e.target.value,
+    })
+  }
 
   return (
     <>
@@ -41,34 +57,58 @@ export const SpecificUser = () => {
 
           <Box shadow="low" padding="10px">
             <Box direction="column">
-              <Box>
-                <Text margin="0 5px 0 0">username:</Text>
-                <Text>{specificUser?.username}</Text>
-              </Box>
-              <Box>
-                <Text margin="0 5px 0 0">id:</Text>
-                <Text>{specificUser?.id}</Text>
-              </Box>
-              <Box>
-                <Text margin="0 5px 0 0">email:</Text>
-                <Text>{specificUser?.email}</Text>
-              </Box>
+              <SimpleInput
+                margin="0 0 5px 0"
+                inputName="username"
+                label="username"
+                placeholder="username"
+                value={specificUser?.username}
+                onChange={e => handleUpdateField(e, 'username')}
+              />
+
+              <SimpleInput
+                margin="0 0 5px 0"
+                inputName="email"
+                label="email"
+                placeholder="email"
+                value={specificUser?.email}
+                onChange={e => handleUpdateField(e, 'email')}
+              />
             </Box>
 
             <Box margin="0 0 0 50px" direction="column">
-              <Box>
-                <Text margin="0 5px 0 0">name:</Text>
-                <Text>{specificUser?.name}</Text>
-              </Box>
-              <Box>
-                <Text margin="0 5px 0 0">phone:</Text>
-                <Text>{specificUser?.phone}</Text>
-              </Box>
-              <Box>
-                <Text margin="0 5px 0 0">website:</Text>
-                <Text>{specificUser?.website}</Text>
-              </Box>
+              <SimpleInput
+                margin="0 0 5px 0"
+                inputName="name"
+                label="name"
+                placeholder="name"
+                value={specificUser?.name}
+                onChange={e => handleUpdateField(e, 'name')}
+              />
+              <SimpleInput
+                margin="0 0 5px 0"
+                inputName="phone"
+                label="phone"
+                placeholder="phone"
+                value={specificUser?.phone}
+                onChange={e => handleUpdateField(e, 'phone')}
+              />
             </Box>
+
+            <Box margin="0 0 0 50px" direction="column">
+              <SimpleInput
+                margin="0 0 5px 0"
+                inputName="website"
+                label="website"
+                placeholder="website"
+                value={specificUser?.website}
+                onChange={e => handleUpdateField(e, 'website')}
+              />
+            </Box>
+
+            <Button onClick={handleDeleteClick} margin="auto 20px auto auto">
+              Delete
+            </Button>
           </Box>
         </>
       )}

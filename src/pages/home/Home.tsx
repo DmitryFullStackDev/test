@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
   Box,
   Button,
   routes,
   SimpleInput,
   Text,
-  useActions,
   useTypedSelector,
 } from '../../shared'
-import { getUsersArray, setUsersArray } from '../../entries/'
 import { useNavigate } from 'react-router-dom'
 
 export const Home = () => {
@@ -17,7 +15,6 @@ export const Home = () => {
   const usersArrayData = useTypedSelector(state => state.usersArray.data)
   const isLoading = useTypedSelector(state => state.usersArray.isLoading)
 
-  const a = useActions({ getUsersArray, setUsersArray })
   const navigate = useNavigate()
 
   const filtratedArr = usersArrayData.filter(item =>
@@ -30,12 +27,6 @@ export const Home = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setValue(e.target.value)
 
-  useEffect(() => {
-    if (usersArrayData.length === 0) {
-      a.getUsersArray()
-    }
-  }, [])
-
   return (
     <>
       <Box width="100%" direction="row" align="center" margin="0 0 50px 0">
@@ -47,7 +38,11 @@ export const Home = () => {
           onChange={handleInputChange}
         />
 
-        <Button margin="0 0 0 20px" width="150px">
+        <Button
+          onClick={() => navigate(routes.addUser)}
+          margin="0 0 0 20px"
+          width="150px"
+        >
           Add new user
         </Button>
       </Box>

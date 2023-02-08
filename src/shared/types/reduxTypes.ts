@@ -7,7 +7,7 @@ export type UserType = {
   name: string
   username: string
   email: string
-  address: {
+  address?: {
     street: string
     suite: string
     city: string
@@ -19,7 +19,7 @@ export type UserType = {
   }
   phone: string
   website: string
-  company: {
+  company?: {
     name: string
     catchPhrase: string
     bs: string
@@ -29,4 +29,13 @@ export type UserType = {
 export type UserSliceType = {
   isLoading: boolean
   data: UserType[]
+}
+
+export type FormikCreateUserType = {
+  username: string
+  email: string
+  name: string
+  phone: string
+  website: string
+  id: number
 }
