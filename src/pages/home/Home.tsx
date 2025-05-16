@@ -28,56 +28,57 @@ export const Home = () => {
     setValue(e.target.value)
 
   return (
-    <>
-      <Box width="100%" direction="row" align="center" margin="0 0 50px 0">
+    <Box direction="column" width="100%" padding="40px" gap="30px">
+      <Box
+        width="100%"
+        direction="row"
+        align="center"
+        justify="space-between"
+        gap="10px"
+      >
         <SimpleInput
           inputName="search"
-          label="search"
-          placeholder="type user name"
+          label="Search Users"
+          placeholder="Type username..."
           value={value}
           onChange={handleInputChange}
         />
 
         <Button
+          type="primary"
           onClick={() => navigate(routes.addUser)}
-          margin="0 0 0 20px"
-          width="150px"
+          width="45px"
         >
-          Add new user
+          +
         </Button>
       </Box>
 
       {isLoading ? (
-        <Text>loading...</Text>
+        <Text type="h18">Loading...</Text>
       ) : (
-        <Box direction="column">
+        <Box direction="column" gap="20px" padding="10px 0">
           {filtratedArr.map(item => (
             <Box
-              onClick={() => navigate(path(item))}
-              cursor="pointer"
-              backgroundHover="ui100"
-              shadow="low"
-              padding="10px"
               key={item.id}
+              onClick={() => navigate(path(item))}
+              direction="column"
+              padding="20px"
+              background="ui100"
+              borderRadius="12px"
+              shadow="low"
+              cursor="pointer"
+              transition="all 0.2s ease"
+              backgroundHover="ui200"
             >
-              <Box direction="column">
-                <Box>
-                  <Text margin="0 5px 0 0">username:</Text>
-                  <Text>{item.username}</Text>
-                </Box>
-                <Box>
-                  <Text margin="0 5px 0 0">id:</Text>
-                  <Text>{item.id}</Text>
-                </Box>
-                <Box>
-                  <Text margin="0 5px 0 0">email:</Text>
-                  <Text>{item.email}</Text>
-                </Box>
-              </Box>
+              <Text type="h18" margin="0 0 5px 0">
+                {item.username}
+              </Text>
+              <Text color="secondary">ID: {item.id}</Text>
+              <Text color="secondary">Email: {item.email}</Text>
             </Box>
           ))}
         </Box>
       )}
-    </>
+    </Box>
   )
 }

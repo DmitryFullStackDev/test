@@ -22,7 +22,7 @@ const ButtonElem: any = styled.button`
     align-self: ${({ alignSelf }: any) => alignSelf};
     white-space: ${({ whiteSpace }: any) => whiteSpace};
 
-    min-width: inherit;
+    min-width: ${({ minWidth }: any) => minWidth};
     border-radius: ${({ borderRadius }: any) => borderRadius || '6px'};
     font-style: normal;
     font-weight: ${({ fontWeight }: any) => fontWeight || 600};
@@ -242,6 +242,7 @@ interface Props {
   colorLink?: string
   fontSize?: string
   colorLinkHover?: string
+  minWidth?: string
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void
   onMouseDown?: (e: MouseEvent<HTMLButtonElement>) => void
   onTouchStart?: (e: TouchEvent<HTMLButtonElement>) => void
@@ -259,6 +260,7 @@ export const Button = forwardRef<HTMLButtonElement, PropsWithChildren<Props>>(
       onClick,
       fontSize,
       fontWeight,
+      minWidth,
       colorLink,
       iconSize,
       shadow,
